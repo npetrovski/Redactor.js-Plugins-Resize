@@ -11,7 +11,7 @@ RedactorPlugins.resize = function ()
         init: function ()
         {
             if (this.opts.resizeX || this.opts.resizeY) {
-                this.resize.handler = $('<div class="redactor-resize-handler" style="cursor:s-resize;display:block;position:absolute;bottom:0;right:0;width:16px;height:16px;background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAAB6JQAAgIMAAPn/AACA6QAAdTAAAOpgAAA6mAAAF2+SX8VGAAAAtUlEQVR42mL8//8/AyUAIICYGCgEAAFEtAFnz551AuKTQJyALA4QQKS4oA6IzYC4C1kQIIBIMWAZEP+F0nAAEECMlAYiQACx4PMzkGoH4unGxsYLZs2aBeenpaUtgKkDCCAmEvyMNQwAAoiJBD9jDQOAAKI4DAACiAlXPKenpzsB8UkgBvMZGRmdgPgkEKOkA4AAYiLBz1jDACCAmEjwM9YwAAggisMAIIAozkwAAUSxAQABBgCBl0L7jJdTdgAAAABJRU5ErkJggg==);" />')
+                this.resize.handler = $('<div class="redactor-resize-handler" />')
                         .bind('mousedown.redactor.resize', $.proxy(this.resize.mousedown, this))
                         .insertAfter(this.$editor);
             }
@@ -33,10 +33,10 @@ RedactorPlugins.resize = function ()
         },
         resize: function (e) {
             if (this.opts.resizeY) {
-                this.$editor.height(this.$editor.height() + (e.pageY - this.resize.drag.y));
+                $('textarea', this.$box).add(this.$editor).height(this.$editor.height() + (e.pageY - this.resize.drag.y));
             }
             if (this.opts.resizeX) {
-                this.$editor.width(this.$editor.width() + (e.pageX - this.resize.drag.x));
+                $('textarea', this.$box).add(this.$editor).width(this.$editor.width() + (e.pageX - this.resize.drag.x));
             }
             this.resize.drag = {x: e.pageX, y: e.pageY};
         }
